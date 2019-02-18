@@ -1,17 +1,17 @@
 package com.example.mainactivity;
 
-import android.widget.Button;
+import java.io.Serializable;
 
-import java.sql.RowId;
-
-
-public class Game {
+public class Game implements Serializable{
 
     final private int BOARD_SIZE = 3;
     private TileState[][] board;
     private Boolean playerOneTurn;  // true if player 1's turn, false if player 2's turn
-    private int movesPlayed;
-    private Boolean gameOver;
+    private int movesPlayed = 0;
+    public Boolean gameOver;
+
+
+
 
     public Game() {
         board = new TileState[BOARD_SIZE][BOARD_SIZE];
@@ -30,14 +30,15 @@ public class Game {
     public TileState choose(int row, int column) {
         if (this.getTileState(row, column) == TileState.BLANK){
             if (playerOneTurn){
-                if()
                 this.board[row][column] = TileState.CROSS;
                 playerOneTurn = false;
+                movesPlayed ++;
                 return TileState.CROSS;
             }
             else{
                 this.board[row][column] = TileState.CIRCLE;
                 playerOneTurn = true;
+                movesPlayed ++;
                 return TileState.CIRCLE;
             }
         }
@@ -48,23 +49,88 @@ public class Game {
 
     }
 
- 
+    public GameState won(){
+        //check all rows
+        if(movesPlayed >= 9){
+            return GameState.DRAW;
+        }
+        else if(getTileState(0, 0) == getTileState(0,1) && getTileState(0,2) == getTileState(0,1) && getTileState(0,1) != TileState.BLANK){
+            if(!playerOneTurn){
+
+                return GameState.PLAYER_ONE;
+            }
+            else {
+                return GameState.PLAYER_TWO;
+            }
+        }
+        else if(getTileState(1,0) == getTileState(1,1) && getTileState(1,2) == getTileState(1,1)&& getTileState(1,0) != TileState.BLANK){
+            if(!playerOneTurn){
+                return GameState.PLAYER_ONE;
+            }
+            else {
+                return GameState.PLAYER_TWO;
+            }
+        }
+        else if(getTileState(2, 0) == getTileState(2,1) && getTileState(2,2) == getTileState(2,1)&& getTileState(2,0) != TileState.BLANK){
+            if(!playerOneTurn){
+                return GameState.PLAYER_ONE;
+            }
+            else {
+                return GameState.PLAYER_TWO;
+            }
+        }
+        //check all columns
+        else if(getTileState(0, 0) == getTileState(1,0) && getTileState(2,0) == getTileState(1,0)&& getTileState(0,0) != TileState.BLANK){
+            if(!playerOneTurn){
+                return GameState.PLAYER_ONE;
+            }
+            else {
+                return GameState.PLAYER_TWO;
+            }
+        }
+        else if(getTileState(0, 1) == getTileState(1,1) && getTileState(2,1) == getTileState(1,1)&& getTileState(0,1) != TileState.BLANK){
+            if(!playerOneTurn){
+                return GameState.PLAYER_ONE;
+            }
+            else {
+
+                return GameState.PLAYER_TWO;
+            }
+        }
+        else if(getTileState(0, 2) == getTileState(1,2) && getTileState(2,2) == getTileState(1,2)&& getTileState(0,2) != TileState.BLANK){
+            if(!playerOneTurn){
+                return GameState.PLAYER_ONE;
+            }
+            else {
+                return GameState.PLAYER_TWO;
+            }
+        }
+        // check voor schuine rij
+        else if(getTileState(0, 0) == getTileState(1,1) && getTileState(2,2) == getTileState(1,1)&& getTileState(0,0) != TileState.BLANK){
+            if(!playerOneTurn){
+
+                return GameState.PLAYER_ONE;
+            }
+            else {
+                return GameState.PLAYER_TWO;
+            }
+        }
+        //check voor andere schuine rij
+        else if(getTileState(2, 0) == getTileState(1,1) && getTileState(0,2) == getTileState(1,1)&& getTileState(2,0) != TileState.BLANK){
+            if(!playerOneTurn){
+                return GameState.PLAYER_ONE;
+            }
+            else {
+                return GameState.PLAYER_TWO;
+            }
+        }
+        else{
+            return GameState.IN_PROGRESS;
+        }
 
 
-   // public GameState status(GameState){
-    //    RowId
-      //  Button btn = (Button)findViewById(id)
-        //player 1 wins with 3 crosses in a row
-        //if(R.id.button1 && R.)
-       // return GameState.PLAYER_ONE
-
-
-       // return GameState.PLAYER_TWO
-
-       // return GameState.IN_PROGRESS
-
-    //}
-
+    }
 
 
 }
+
