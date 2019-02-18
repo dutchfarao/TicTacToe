@@ -84,18 +84,7 @@ public class MainActivity extends AppCompatActivity {
         btn9.setText(inState.getCharSequence("btn9"));
         txt1.setVisibility(inState.getInt("txt1"));
 
-        if(game.won() == GameState.PLAYER_ONE || game.won() == GameState.PLAYER_TWO){
-            btn1.setEnabled(false);
-            btn2.setEnabled(false);
-            btn3.setEnabled(false);
-            btn4.setEnabled(false);
-            btn5.setEnabled(false);
-            btn6.setEnabled(false);
-            btn7.setEnabled(false);
-            btn8.setEnabled(false);
-            btn9.setEnabled(false);
-        }
-
+      
     }
 
 
