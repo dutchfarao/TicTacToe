@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         btn9.setText(inState.getCharSequence("btn9"));
         txt1.setVisibility(inState.getInt("txt1"));
 
-      
+
     }
 
 
@@ -125,13 +125,14 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
         }
+        //call GameEnder and buttonUpdater
         game.won();
         GameEnder(game.won());
 
         buttonUpdater(state, id);
 
     }
-
+    //disable all ties when there is a tie or when someone wins
     public void GameEnder(GameState state){
         TextView txt1;
         Button btn1;
@@ -143,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
         Button btn7;
         Button btn8;
         Button btn9;
-        txt1 = (TextView)findViewById(R.id.textView);
+        txt1 = findViewById(R.id.textView);
         btn1 = findViewById(R.id.button1);
         btn2 = findViewById(R.id.button2);
         btn3 = findViewById(R.id.button3);
@@ -205,8 +206,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void buttonUpdater(TileState state, int id){
 
-        // globally
-        Button btn = (Button)findViewById(id);
+        // change the tilestate of button
+        Button btn = findViewById(id);
 
 
         switch(state) {
@@ -222,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
+    //reset game when 'reset' button is clicked
     public void resetClicked(View view) {
         setContentView(R.layout.activity_main);
         game = new Game();

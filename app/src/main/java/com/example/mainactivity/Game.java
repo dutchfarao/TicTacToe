@@ -12,7 +12,7 @@ public class Game implements Serializable{
 
 
 
-
+//create board, set tilestate to blank for all tiles
     public Game() {
         board = new TileState[BOARD_SIZE][BOARD_SIZE];
         for (int i = 0; i < BOARD_SIZE; i++)
@@ -27,6 +27,7 @@ public class Game implements Serializable{
         return this.board[row][column];
     }
 
+    //change tilestate, switch between player 1 and two, then add 1 to movesplayed to keep track of the turn for a tie.
     public TileState choose(int row, int column) {
         if (this.getTileState(row, column) == TileState.BLANK){
             if (playerOneTurn){
@@ -49,8 +50,9 @@ public class Game implements Serializable{
 
     }
 
+
     public GameState won(){
-        //check all rows
+        //check all possible winning combinations, also check for a tie.
         if(movesPlayed >= 9){
             return GameState.DRAW;
         }
